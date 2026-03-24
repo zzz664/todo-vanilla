@@ -4,12 +4,39 @@ import { CheckRegisterInfo } from './scripts/CheckRegisterInfo.js';
 import { Login } from './scripts/login.js';
 import { Register } from './scripts/register.js';
 import Modal from './scripts/Modal.js';
+import Auth from './scripts/ControllAuthButton.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  Auth.ControllAuthButton();
+
+  if (Auth.CheckAuth()) {
+    const home = document.getElementById('todoList');
+    const element = document.createElement('div');
+    element.className = 'todo';
+    element.textContent = 'todo List';
+    home.replaceChildren(element);
+  } else {
+    const home = document.getElementById('todoList');
+    const element = document.createElement('div');
+    element.className = 'notAuth';
+    element.style.whiteSpace = 'pre-wrap';
+    element.style.textAlign = 'center';
+    element.textContent =
+      '로그인 상태가 아닙니다.\n목록을 추가하려면 로그인하십시오.';
+    home.replaceChildren(element);
+  }
+});
 
 document.addEventListener('click', (e) => {
   const id = e.target.id;
 
   if (id === 'loginPageBtn' || id === 'registerPageBtn') {
     ChangeContent(e.target.id);
+  }
+
+  if (id === 'logoutBtn') {
+    localStorage.removeItem('token');
+    location.reload();
   }
 
   if (id === 'modalCloseBtn' || id === 'modal') {
@@ -42,9 +69,8 @@ document.addEventListener('submit', async (e) => {
 
         try {
           const loginResult = await Login(loginInfo);
-          Modal.setContent(loginResult.message);
-          Modal.show();
-          ChangeContent('homePage');
+          location.reload();
+          Auth.ControllAuthButton();
           break;
         } catch (error) {
           Modal.setContent(error.message);
