@@ -15,7 +15,8 @@ body {
   display: none;
 }
 
-form {
+#loginForm,
+#registerForm {
   width: 500px;
   display: grid;
   grid-template-columns: 1fr;
@@ -28,5 +29,39 @@ form {
 
   legend {
     justify-self: center;
+  }
+}
+
+#todoFormFieldset {
+  display: grid;
+  grid-template-columns: 1.3fr 0.5fr 0.1fr;
+  gap: 10px;
+  #newTodoTitle {
+    grid-row: 1;
+  }
+
+  #newTodoDesc {
+    grid-row: 2;
+  }
+
+  #newTodoDueDate {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .priorityWrap {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  #submitTodoBtn {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+
+  #modifyBtnContainer {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
   }
 }

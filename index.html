@@ -18,7 +18,33 @@
     </header>
     <main id="appContent"></main>
     <div id="home" class="">
-      <div id="todoList"></div>
+      <form id="todoForm">
+        <fieldset id="todoFormFieldset">
+          <input
+            type="text"
+            id="newTodoTitle"
+            placeholder="새 할 일의 제목을 입력하세요." />
+          <input
+            type="text"
+            id="newTodoDesc"
+            placeholder="새 할 일의 설명을 입력하세요." />
+          <div class="priorityWrap">
+            <label for="newTodoPriority">우선도</label>
+            <select name="priority" id="newTodoPriority">
+              <option value="HIGH">높음</option>
+              <option value="MEDIUM">중간</option>
+              <option value="LOW">낮음</option>
+            </select>
+          </div>
+          <div id="modifyBtnContainer" class="hidden">
+            <button type="submit" id="applyModifyBtn">수정완료</button>
+            <button type="button" id="cancelModifyBtn">수정취소</button>
+          </div>
+          <input type="date" name="dueDate" id="newTodoDueDate" />
+          <button type="submit" id="submitTodoBtn">+</button>
+        </fieldset>
+      </form>
+      <ul id="todoList"></ul>
     </div>
     <div id="login" class="hidden">
       <form id="loginForm">
