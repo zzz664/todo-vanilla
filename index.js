@@ -1,8 +1,11 @@
 import templateUtils from './scripts/templateUtils.js';
+import { setupHome } from './scripts/home.js';
+import { setupLogin } from './scripts/login.js';
+import { setupRegister } from './scripts/register.js';
 
-templateUtils.addRoutes('/', 'homeTemplate');
-templateUtils.addRoutes('/login', 'loginTemplate');
-templateUtils.addRoutes('/register', 'registerTemplate');
+templateUtils.addRoutes('/', 'homeTemplate', setupHome);
+templateUtils.addRoutes('/login', 'loginTemplate', setupLogin);
+templateUtils.addRoutes('/register', 'registerTemplate', setupRegister);
 
 document.addEventListener('click', (e) => {
   if (e.target.tagName === 'A') {

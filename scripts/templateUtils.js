@@ -2,7 +2,7 @@ let routes = {};
 const appContent = document.getElementById('appContent');
 
 function getTemplateByPath(path) {
-  const templateId = routes[path] ?? 'notFountTemplate';
+  const templateId = routes[path].id ?? 'notFountTemplate';
   return document.getElementById(templateId);
 }
 
@@ -11,14 +11,14 @@ function cloneTemplate(path) {
   return template.content.cloneNode(true);
 }
 
-function render(path, callback) {
+function render(path) {
   const fragment = cloneTemplate(path);
-  setup(callback);
+  setup(fragment, routes[path].setup);
   appContent.replaceChildren(fragment);
 }
 
-function setup(callback) {
-  callback();
+function setup(fragment, callback) {
+  callback(fragment);
 }
 
 function navigate(path) {
@@ -26,13 +26,12 @@ function navigate(path) {
   render(path);
 }
 
-function addRoutes(path, templateId) {
+function addRoutes(path, templateId, setup) {
   if (Object.keys(routes).includes(path)) {
     return;
   }
 
-  routes[path] = templateId;
-  console.log(routes);
+  routes[path] = { id: templateId, setup: setup };
 }
 
 export default { render, navigate, addRoutes };
