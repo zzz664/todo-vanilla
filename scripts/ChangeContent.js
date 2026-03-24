@@ -4,6 +4,14 @@ const register = document.getElementById('register');
 
 export function ChangeContent(id) {
   switch (id) {
+    case 'homePage':
+      if (!home.classList.contains('hidden')) {
+        break;
+      }
+      home.classList.remove('hidden');
+      login.classList.add('hidden');
+      register.classList.add('hidden');
+      break;
     case 'loginPageBtn':
       if (!login.classList.contains('hidden')) {
         break;

@@ -1,7 +1,9 @@
 import { ChangeContent } from './scripts/ChangeContent.js';
+import { CheckLoginInfo } from './scripts/CheckLoginInfo.js';
 import { CheckRegisterInfo } from './scripts/CheckRegisterInfo.js';
-import Modal from './scripts/Modal.js';
+import { Login } from './scripts/login.js';
 import { Register } from './scripts/register.js';
+import Modal from './scripts/Modal.js';
 
 document.addEventListener('click', (e) => {
   const id = e.target.id;
@@ -22,11 +24,35 @@ document.addEventListener('submit', async (e) => {
 
     switch (id) {
       case 'loginForm':
+        Modal.setTitle('로그인');
         const loginId = document.getElementById('loginId').value.trim();
         const loginPw = document.getElementById('loginPassword').value.trim();
-        console.log(loginId + ' ' + loginPw);
-        break;
+        const loginInfo = {
+          id: loginId,
+          pw: loginPw,
+        };
+
+        const loginValidation = CheckLoginInfo(loginInfo);
+
+        if (!loginValidation.status) {
+          Modal.setContent(loginValidation.message);
+          Modal.show();
+          break;
+        }
+
+        try {
+          const loginResult = await Login(loginInfo);
+          Modal.setContent(loginResult.message);
+          Modal.show();
+          ChangeContent('homePage');
+          break;
+        } catch (error) {
+          Modal.setContent(error.message);
+          Modal.show();
+          break;
+        }
       case 'registerForm':
+        Modal.setTitle('회원가입');
         const registerId = document.getElementById('registerId').value.trim();
         const registerPw = document
           .getElementById('registerPassword')
@@ -39,24 +65,21 @@ document.addEventListener('submit', async (e) => {
           pw: registerPw,
           nick: registerNick,
         };
-        const validationResult = CheckRegisterInfo(registerInfo);
+        const registerValidation = CheckRegisterInfo(registerInfo);
 
-        if (!validationResult.status) {
-          Modal.setTitle('회원가입');
-          Modal.setContent(validationResult.message);
+        if (!registerValidation.status) {
+          Modal.setContent(registerValidation.message);
           Modal.show();
           break;
         }
 
         try {
           const registerResult = await Register(registerInfo);
-          Modal.setTitle('회원가입');
           Modal.setContent(registerResult.message);
           Modal.show();
           ChangeContent('loginPageBtn');
           break;
         } catch (error) {
-          Modal.setTitle('회원가입');
           Modal.setContent(error.message);
           Modal.show();
           break;
