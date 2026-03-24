@@ -1,11 +1,13 @@
-import { ChangeContentByButton } from './scripts/ChangeContent.js';
+import { ChangeContent } from './scripts/ChangeContent.js';
+import { CheckRegisterInfo } from './scripts/CheckRegisterInfo.js';
 import Modal from './scripts/Modal.js';
+import { Register } from './scripts/register.js';
 
 document.addEventListener('click', (e) => {
   const id = e.target.id;
 
   if (id === 'loginPageBtn' || id === 'registerPageBtn') {
-    ChangeContentByButton(e.target.id);
+    ChangeContent(e.target.id);
   }
 
   if (id === 'modalCloseBtn' || id === 'modal') {
@@ -13,7 +15,7 @@ document.addEventListener('click', (e) => {
   }
 });
 
-document.addEventListener('submit', (e) => {
+document.addEventListener('submit', async (e) => {
   if (e.target.tagName === 'FORM') {
     const id = e.target.id;
     e.preventDefault();
@@ -25,8 +27,6 @@ document.addEventListener('submit', (e) => {
         console.log(loginId + ' ' + loginPw);
         break;
       case 'registerForm':
-        let check = true;
-        let error = '';
         const registerId = document.getElementById('registerId').value.trim();
         const registerPw = document
           .getElementById('registerPassword')
@@ -34,31 +34,33 @@ document.addEventListener('submit', (e) => {
         const registerNick = document
           .getElementById('registerNickname')
           .value.trim();
-        if (!window.APP_CONFIG.ID_REG.test(registerId)) {
-          error += '아이디 조건 안맞음\n';
-          check = false;
-        }
+        const registerInfo = {
+          id: registerId,
+          pw: registerPw,
+          nick: registerNick,
+        };
+        const validationResult = CheckRegisterInfo(registerInfo);
 
-        if (!window.APP_CONFIG.PW_REG.test(registerPw)) {
-          error += '비밀번호 조건 안맞음\n';
-          check = false;
-        }
-
-        if (!window.APP_CONFIG.NICK_REG.test(registerNick)) {
-          error += '닉네임 조건 안맞음\n';
-          check = false;
-        }
-
-        if (!check) {
+        if (!validationResult.status) {
           Modal.setTitle('회원가입');
-          Modal.setContent(error);
+          Modal.setContent(validationResult.message);
           Modal.show();
           break;
         }
 
-        console.log('조건 다 맞음');
-
-        break;
+        try {
+          const registerResult = await Register(registerInfo);
+          Modal.setTitle('회원가입');
+          Modal.setContent(registerResult.message);
+          Modal.show();
+          ChangeContent('loginPageBtn');
+          break;
+        } catch (error) {
+          Modal.setTitle('회원가입');
+          Modal.setContent(error.message);
+          Modal.show();
+          break;
+        }
     }
   }
 });

@@ -24,8 +24,10 @@
     inline-size: 100%;
     padding-block: 0.3125rem;
     justify-self: start;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     line-height: 1.5rem;
+    font-weight: 600;
+    align-content: center;
     color: #2d2d2d;
     border-top: 1px solid #dfdfdf;
     border-bottom: 1px solid #dfdfdf;

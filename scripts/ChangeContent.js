@@ -2,7 +2,7 @@ const home = document.getElementById('home');
 const login = document.getElementById('login');
 const register = document.getElementById('register');
 
-export function ChangeContentByButton(id) {
+export function ChangeContent(id) {
   switch (id) {
     case 'loginPageBtn':
       if (!login.classList.contains('hidden')) {
