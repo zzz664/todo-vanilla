@@ -5,7 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>오늘 뭐하지?</title>
     <link rel="stylesheet" href="./index.css" />
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./config.js"></script>
   </head>
-  <body></body>
+  <body>
+    <header id="appHeader">
+      <a href="/" id="logo" data-link> <h1>TODO: 오늘 뭐하지?</h1> </a>
+      <div id="authBtnContainer">
+        <a href="/login" id="loginBtn" data-link>로그인</a>
+        <a href="/register" id="registerBtn" data-link>회원가입</a>
+      </div>
+    </header>
+    <main id="appContent"></main>
+    <template id="homeTemplate">
+      <div>메인 홈</div>
+    </template>
+    <template id="loginTemplate">
+      <div>로그인 템플릿</div>
+    </template>
+    <template id="registerTemplate">
+      <div>회원가입 템플릿</div>
+    </template>
+    <template id="notFountTemplate">
+      <div>페이지를 찾을 수 없습니다.</div>
+    </template>
+    <script type="module" src="./index.js"></script>
+  </body>
 </html>
