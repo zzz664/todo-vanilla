@@ -1,3 +1,32 @@
+@import url(./styles/modal.css);
+
+body {
+  font-family: sans-serif;
+}
+
+pre,
+h3,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .hidden {
   display: none;
+}
+
+form {
+  width: 500px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem;
+
+  fieldset {
+    display: contents;
+  }
+
+  legend {
+    justify-self: center;
+  }
 }

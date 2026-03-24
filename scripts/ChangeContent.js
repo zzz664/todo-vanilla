@@ -4,7 +4,7 @@ const register = document.getElementById('register');
 
 export function ChangeContentByButton(id) {
   switch (id) {
-    case 'loginBtn':
+    case 'loginPageBtn':
       if (!login.classList.contains('hidden')) {
         break;
       }
@@ -12,7 +12,7 @@ export function ChangeContentByButton(id) {
       login.classList.remove('hidden');
       register.classList.add('hidden');
       break;
-    case 'registerBtn':
+    case 'registerPageBtn':
       if (!register.classList.contains('hidden')) {
         break;
       }
