@@ -1,4 +1,6 @@
-class TodoItem {
+import { TODO_ITEM_TEMPLATE } from './Constants';
+
+export class TodoItem {
   #id = '';
   #title = '';
   #description = '';
@@ -8,20 +10,9 @@ class TodoItem {
   #completedAt = '';
   #createdAt = '';
   #updatedAt = '';
-  #template = `
-    <div class='todoBadgeContainer'>
-      <span class='todoCompleted'></span>
-      <span class='todoPriority'></span>
-    </div>
-    <details class='todoContent'>
-      <summary class='todoTitle'></summary>
-      <p class='todoDesc'></p>
-    </details>
-    <span class='todoDueDate'></span>
-    `;
   #element = null;
   #titleNode = null;
-  #descNode = null;
+  #descriptionNode = null;
   #completedNode = null;
   #priorityNode = null;
   #dueDateNode = null;
@@ -54,10 +45,10 @@ class TodoItem {
     li.className = 'todoItem';
     li.dataset.id = this.#id;
 
-    li.innerHTML = this.#template;
+    li.innerHTML = TODO_ITEM_TEMPLATE;
 
     this.#titleNode = li.querySelector('.todoTitle');
-    this.#descNode = li.querySelector('.todoDesc');
+    this.#descriptionNode = li.querySelector('.todoDesc');
     this.#completedNode = li.querySelector('.todoCompleted');
     this.#priorityNode = li.querySelector('.todoPriority');
     this.#dueDateNode = li.querySelector('.todoDueDate');
@@ -81,7 +72,7 @@ class TodoItem {
     };
   }
 
-  getelement() {
+  getElement() {
     return this.#element;
   }
 
@@ -108,7 +99,7 @@ class TodoItem {
 
   #syncDOM() {
     this.#titleNode.textContent = this.#title;
-    this.#descNode.textContent = this.#description;
+    this.#descriptionNode.textContent = this.#description;
     this.#priorityNode.textContent = this.#priority;
     this.#dueDateNode.textContent = this.#dueDate;
     this.#completedNode.textContent = this.#completed ? '완료' : '미완료';
@@ -119,9 +110,9 @@ class TodoItem {
     this.#titleNode.textContent = this.#title;
   }
 
-  setDesc(description) {
+  setDescription(description) {
     this.#description = description;
-    this.#descNode.textContent = this.#description;
+    this.#descriptionNode.textContent = this.#description;
   }
 
   setPriority(priority) {
