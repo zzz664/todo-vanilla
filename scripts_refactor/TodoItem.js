@@ -103,10 +103,20 @@ export class TodoItem {
       ? this.#description
       : '세부설명 없음';
     this.#priorityNode.textContent = this.#priority;
+    this.#priorityNode.classList.add(
+      this.#priority === 'HIGH'
+        ? 'high'
+        : this.#priority === 'MEDIUM'
+          ? 'medium'
+          : 'low',
+    );
     this.#dueDateNode.textContent = this.#dueDate
-      ? this.#dueDate
+      ? `마감일: ${this.#dueDate}`
       : '마감일 없음';
     this.#completedNode.textContent = this.#completed ? '완료' : '미완료';
+    this.#completedNode.classList.add(
+      this.#completed ? 'completed' : 'uncompleted',
+    );
   }
 
   setTitle(title) {
@@ -129,7 +139,7 @@ export class TodoItem {
   setDueDate(dueDate) {
     this.#dueDate = dueDate;
     this.#dueDateNode.textContent = this.#dueDate
-      ? this.#dueDate
+      ? `마감일 ${this.#dueDate}`
       : '마감일 없음';
   }
 

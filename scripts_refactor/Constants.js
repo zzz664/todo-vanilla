@@ -1,12 +1,13 @@
 export const TODO_ITEM_TEMPLATE = `
     <div class='todoBadgeContainer'>
-      <span class='todoCompleted'></span>
-      <span class='todoPriority'></span>
+      <span class='todoCompleted badge'></span>
+      <span class='todoPriority badge'></span>
     </div>
     <details class='todoContent'>
       <summary class='todoTitle'></summary>
       <p class='todoDesc'></p>
     </details>
+    <button type="button" class="todoDeleteBtn"><i class="fa-solid fa-x"></i></button>
     <span class='todoDueDate'></span>
     `;
 export const API_BASE_URL = 'https://api.fullstackfamily.com/api/edu/ws-dbd822';

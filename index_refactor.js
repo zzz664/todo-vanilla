@@ -40,6 +40,9 @@ if (!token) {
         alert('할 일을 추가하려면 제목은 반드시 입력해야합니다.');
         return;
       }
+      if (todoListMap.size === 0) {
+        todoList.firstElementChild.remove();
+      }
 
       addTodoItem();
 
@@ -47,6 +50,24 @@ if (!token) {
       newTodoDescription.value = '';
       newTodoPriority.value = 'MEDIUM';
       newTodoDueDate.value = '';
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (
+      e.target.className === 'todoDeleteBtn' ||
+      e.target.className === 'fa-solid fa-x'
+    ) {
+      const target = e.target.closest('li');
+      const id = target.dataset.id;
+      const deletePromise = deleteTodoItem(id);
+      deletePromise.then((result) => {
+        todoListMap.delete(Number.parseInt(id));
+        todoList.removeChild(target);
+        if (todoListMap.size === 0) {
+          renderEmpty();
+        }
+      });
     }
   });
 }
@@ -83,7 +104,10 @@ function renderEmpty() {
   const emptyTemplate = document.getElementById('emptyTemplate');
   const emptyTodoList = emptyTemplate.content.cloneNode(true);
 
-  todoList.replaceChildren(emptyTodoList);
+  if (todoList.firstElementChild) {
+    todoList.firstElementChild.remove();
+  }
+  todoList.append(emptyTodoList);
 }
 
 function renderTodoList() {
@@ -174,4 +198,21 @@ async function addTodoItem() {
 
   todoListMap.set(data.id, new TodoItem(data));
   renderTodoList();
+}
+
+async function deleteTodoItem(id) {
+  const res = await fetch(`${API_BASE_URL}/todos/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const { success, message } = await res.json();
+
+  if (!success) {
+    throw new Error(message);
+  }
+
+  return success;
 }
