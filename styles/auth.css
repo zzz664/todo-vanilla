@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  block-size: 100vh;
+}
+
+main {
+  inline-size: 100%;
+  block-size: 100%;
+  display: grid;
+  grid-template-columns: 1fr 500px 1fr;
+  place-items: center;
+}
+
+.logo {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  margin-block-start: 10rem;
+  color: #4f4f4f;
+  text-decoration: none;
+}
+
+form {
+  grid-column: 2;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: subgrid;
+  gap: 1.25rem;
+  border: 1px solid #5f5f5f;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+fieldset {
+  display: contents;
+}
+
+legend {
+  place-self: center;
+}
