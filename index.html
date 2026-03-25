@@ -14,7 +14,7 @@
       <details id="todoInput" open>
         <summary>할 일 추가하기</summary>
         <p>할 일의 제목은 반드시 입력해야하며, 나머지는 선택사항입니다.</p>
-        <form id="todoForm">
+        <form id="todoForm" method="POST">
           <fieldset id="todoFormFieldset">
             <input
               type="text"
@@ -65,6 +65,12 @@
           </p>
         </div>
       </div>
+    </template>
+    <template id="loadingTemplate">
+      <li class="loading">할 일 목록 로딩중...</li>
+    </template>
+    <template id="emptyTemplate">
+      <li class="emptyTodoList">할 일 목록이 비어있습니다.</li>
     </template>
     <script type="module" src="./index_refactor.js"></script>
   </body>

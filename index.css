@@ -14,6 +14,12 @@ body {
   gap: 10px;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .hidden {
   display: none;
 }
@@ -34,6 +40,7 @@ body {
   grid-column: 2 / span 3;
   display: grid;
   grid-template-columns: subgrid;
+  gap: 15px;
 }
 
 #todoInput {
@@ -74,6 +81,17 @@ body {
   }
 }
 
+.todoItem {
+  grid-column: 1 / -1;
+  padding: 20px;
+  border: 1px solid #5f5f5f;
+  border-radius: 15px;
+}
+
+#todoList {
+  display: contents;
+}
+
 .requireLoginRegister {
   grid-column: 2;
   grid-row: 3;
@@ -84,5 +102,5 @@ body {
   grid-row: 2;
   border: 0;
   border-bottom: 1px solid #5f5f5f;
-  margin: 20px 0;
+  margin: 1px 0;
 }

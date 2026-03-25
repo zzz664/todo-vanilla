@@ -1,15 +1,15 @@
 import { TODO_ITEM_TEMPLATE } from './Constants.js';
 
 export class TodoItem {
-  #id = '';
-  #title = '';
-  #description = '';
-  #completed = false;
-  #priority = '';
-  #dueDate = '';
-  #completedAt = '';
-  #createdAt = '';
-  #updatedAt = '';
+  #id;
+  #title;
+  #description;
+  #completed;
+  #priority;
+  #dueDate;
+  #completedAt;
+  #createdAt;
+  #updatedAt;
   #element = null;
   #titleNode = null;
   #descriptionNode = null;
@@ -99,9 +99,13 @@ export class TodoItem {
 
   #syncDOM() {
     this.#titleNode.textContent = this.#title;
-    this.#descriptionNode.textContent = this.#description;
+    this.#descriptionNode.textContent = this.#description
+      ? this.#description
+      : '세부설명 없음';
     this.#priorityNode.textContent = this.#priority;
-    this.#dueDateNode.textContent = this.#dueDate;
+    this.#dueDateNode.textContent = this.#dueDate
+      ? this.#dueDate
+      : '마감일 없음';
     this.#completedNode.textContent = this.#completed ? '완료' : '미완료';
   }
 
@@ -112,7 +116,9 @@ export class TodoItem {
 
   setDescription(description) {
     this.#description = description;
-    this.#descriptionNode.textContent = this.#description;
+    this.#descriptionNode.textContent = this.#description
+      ? this.#description
+      : '세부설명 없음';
   }
 
   setPriority(priority) {
@@ -122,7 +128,9 @@ export class TodoItem {
 
   setDueDate(dueDate) {
     this.#dueDate = dueDate;
-    this.#dueDateNode.textContent = this.#dueDate;
+    this.#dueDateNode.textContent = this.#dueDate
+      ? this.#dueDate
+      : '마감일 없음';
   }
 
   setCompleted(completed) {
