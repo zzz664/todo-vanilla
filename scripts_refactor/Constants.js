@@ -3,6 +3,7 @@ export const TODO_ITEM_TEMPLATE = `
       <span class='todoCompleted badge'></span>
       <span class='todoPriority badge'></span>
     </div>
+    <i class="fa-solid fa-splotch marker"></i>
     <details class='todoContent'>
       <summary class='todoTitle'></summary>
       <p class='todoDesc'></p>

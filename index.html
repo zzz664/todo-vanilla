@@ -15,8 +15,10 @@
     </header>
     <main id="appContent">
       <details id="todoInput" open>
-        <summary>할 일 추가하기</summary>
-        <p>할 일의 제목은 반드시 입력해야하며, 나머지는 선택사항입니다.</p>
+        <summary class="todoInputSummary">할 일 추가하기</summary>
+        <p class="todoInputDesc">
+          할 일의 제목은 반드시 입력해야하며, 나머지는 선택사항입니다.
+        </p>
         <form id="todoForm" method="POST">
           <fieldset id="todoFormFieldset">
             <input
@@ -28,7 +30,7 @@
               id="newTodoDescription"
               placeholder="새 할 일의 설명을 입력하세요." />
             <div class="priorityWrap">
-              <label for="newTodoPriority">우선도</label>
+              <label for="newTodoPriority">우선도:</label>
               <select name="priority" id="newTodoPriority">
                 <option value="HIGH">높음</option>
                 <option value="MEDIUM" selected>중간</option>
@@ -40,7 +42,9 @@
               <button type="button" id="cancelModifyBtn">수정취소</button>
             </div>
             <input type="date" name="dueDate" id="newTodoDueDate" />
-            <button type="submit" id="submitTodoBtn">+</button>
+            <button type="submit" id="submitTodoBtn">
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </fieldset>
         </form>
       </details>
