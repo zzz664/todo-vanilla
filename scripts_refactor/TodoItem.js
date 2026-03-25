@@ -1,4 +1,4 @@
-import { TODO_ITEM_TEMPLATE } from './Constants';
+import { TODO_ITEM_TEMPLATE } from './Constants.js';
 
 export class TodoItem {
   #id = '';
