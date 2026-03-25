@@ -5,48 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>오늘 뭐하지?</title>
     <link rel="stylesheet" href="./index.css" />
-    <script type="module" src="./config.js"></script>
   </head>
   <body>
     <header id="appHeader">
-      <a href="/" id="logo"><h1>TODO: 오늘 뭐하지?</h1></a>
-      <div id="authBtnContainer">
-        <a href="/login" id="loginPage">로그인</a>
-        <a href="/register" id="registerPage">회원가입</a>
-        <button id="logoutBtn" type="button" class="hidden">로그아웃</button>
-      </div>
+      <a href="/" class="logo"><h1>TODO: 오늘 뭐하지?</h1></a>
     </header>
-    <main id="appContent"></main>
-    <div id="home" class="">
-      <form id="todoForm">
-        <fieldset id="todoFormFieldset">
-          <input
-            type="text"
-            id="newTodoTitle"
-            placeholder="새 할 일의 제목을 입력하세요." />
-          <input
-            type="text"
-            id="newTodoDesc"
-            placeholder="새 할 일의 설명을 입력하세요." />
-          <div class="priorityWrap">
-            <label for="newTodoPriority">우선도</label>
-            <select name="priority" id="newTodoPriority">
-              <option value="HIGH">높음</option>
-              <option value="MEDIUM">중간</option>
-              <option value="LOW">낮음</option>
-            </select>
-          </div>
-          <div id="modifyBtnContainer" class="hidden">
-            <button type="submit" id="applyModifyBtn">수정완료</button>
-            <button type="button" id="cancelModifyBtn">수정취소</button>
-          </div>
-          <input type="date" name="dueDate" id="newTodoDueDate" />
-          <button type="submit" id="submitTodoBtn">+</button>
-        </fieldset>
-      </form>
+    <main id="appContent">
+      <details id="todoInput" open>
+        <summary>할 일 추가하기</summary>
+        <form id="todoForm">
+          <fieldset id="todoFormFieldset">
+            <input
+              type="text"
+              id="newTodoTitle"
+              placeholder="새 할 일의 제목을 입력하세요." />
+            <input
+              type="text"
+              id="newTodoDesc"
+              placeholder="새 할 일의 설명을 입력하세요." />
+            <div class="priorityWrap">
+              <label for="newTodoPriority">우선도</label>
+              <select name="priority" id="newTodoPriority">
+                <option value="HIGH">높음</option>
+                <option value="MEDIUM">중간</option>
+                <option value="LOW">낮음</option>
+              </select>
+            </div>
+            <div id="modifyBtnContainer" class="hidden">
+              <button type="submit" id="applyModifyBtn">수정완료</button>
+              <button type="button" id="cancelModifyBtn">수정취소</button>
+            </div>
+            <input type="date" name="dueDate" id="newTodoDueDate" />
+            <button type="submit" id="submitTodoBtn">+</button>
+          </fieldset>
+        </form>
+      </details>
+      <hr class="horizontalLine" />
       <ul id="todoList"></ul>
-    </div>
-
+    </main>
     <div id="modal" class="hidden">
       <div class="modalBody">
         <h3 class="modalTitle">제목</h3>
@@ -54,6 +50,21 @@
         <button type="button" id="modalCloseBtn">닫기</button>
       </div>
     </div>
+    <template id="unAuthWarn">
+      <div class="requireLoginRegister">
+        <div class="requiredWrap">
+          <p>
+            서비스를 이용하려면 로그인을 해야합니다.
+            <a href="/login">> 로그인 하러가기</a>
+          </p>
+        </div>
+        <div class="requiredWrap">
+          <p>
+            아직 계정이 없으신가요? <a href="/register">> 회원가입 하러가기</a>
+          </p>
+        </div>
+      </div>
+    </template>
     <script type="module" src="./index_refactor.js"></script>
   </body>
 </html>
